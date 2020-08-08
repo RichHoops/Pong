@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Rectangle;
 
 public class Sprite {
 
@@ -5,6 +7,7 @@ public class Sprite {
 	private int xVelocity, yVelocity;
 	private int width, height;
 	private int initialXPosition, initialYPosition;
+	private Color colour;
 	
 	
 	public int getXPosition() { return xPosition; }
@@ -13,6 +16,7 @@ public class Sprite {
     public int getYVelocity() { return yVelocity; }
     public int getWidth() { return width; }
     public int getHeight() { return height; }
+    public Color getColour() { return colour; }
    
     public void setXPosition(int newX, int panelWidth) {
     	xPosition = newX;
@@ -67,6 +71,10 @@ public class Sprite {
     	}
     }
     
+    public void setColour(Color newColour) {
+        colour = newColour;
+    }
+    
     public void setInitialPosition(int initialX, int initialY) {
     	initialXPosition = initialX;
     	initialYPosition = initialY; 	
@@ -75,6 +83,10 @@ public class Sprite {
     public void resetToInitialPosition() {
     	setXPosition(initialXPosition);
     	setYPosition(initialYPosition);
+    }
+    
+    public Rectangle getRectangle() {
+        return new Rectangle(getXPosition(), getYPosition(), getWidth(), getHeight());
     }
 	
 }
