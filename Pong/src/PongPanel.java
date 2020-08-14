@@ -14,11 +14,36 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	private static final Color BACKGROUND_COLOUR = Color.BLACK;
 	private final static int TIMER_DELAY = 5;
+	Ball ball;
+	Paddle paddle1, paddle2;
+	GameState gameState = GameState.Initialising;
+	
+	private void createObjects() {
+		ball = new Ball(getWidth(), getHeight());
+		paddle1 = new Paddle(getWidth(), getHeight(), Player.One);
+		paddle2 = new Paddle(getWidth(), getHeight(), Player.Two);
+	}
+	
+	private void update() {
+		switch(gameState) {
+			case Initialising: {
+				createObjects();
+				gameState = GameState.Playing;
+				break;
+			}
+			case Playing:{
+				break;
+			}
+			case GameOver:{
+				break;
+			}
+		}
+	}
 	
 	public PongPanel() {
         setBackground(BACKGROUND_COLOUR);
-        //Timer timer = new Timer(TIMER_DELAY, this);
-        //timer.start();
+        Timer timer = new Timer(TIMER_DELAY, this);
+        timer.start();
     }
 	
 	@Override
@@ -38,10 +63,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	private void update() {
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -54,6 +75,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	 public void paintComponent(Graphics g) {
 	     super.paintComponent(g);
 	     paintDottedLine(g);
+	     if(gameState != GameState.Initialising) {
+	    	 paintSprite(g, ball);
+	    	 paintSprite(g, paddle1);
+	    	 paintSprite(g, paddle2);
+	     }
 	 }
 	
 	private void paintDottedLine(Graphics g) {
@@ -64,5 +90,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	         g2d.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
 	         g2d.dispose();
 	 }
+	
+	private void paintSprite(Graphics g, Sprite sprite) {
+	      g.setColor(sprite.getColour());
+	      g.fillRect(sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth(), sprite.getHeight());
+	}
+	
+	
 
 }
