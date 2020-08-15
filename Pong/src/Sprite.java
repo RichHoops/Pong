@@ -45,16 +45,10 @@ public class Sprite {
     
     public void setXVelocity(int newXVelocity) {
         xVelocity = newXVelocity;
-        if (xVelocity < 0) {
-        	xVelocity = 0;
-    	} 
     }
    
     public void setYVelocity(int newYVelocity) {
         yVelocity = newYVelocity;
-        if (yVelocity < 0) {
-        	yVelocity = 0;
-    	}
     }
    
     public void setWidth(int newWidth) {
